@@ -44,7 +44,7 @@
 #define PIN_OUT_4 16       // Node D0 - MOSFET 4 - 12VDC
 #define PIN_SPI_1 5        // Node D1 - SPI GPIO Pin
 #define PIN_SPI_2 4        // Node D2 - SPI GPIO Pin - @TODO CURRENTLY UNUSED
-#define NUM_LEDS 10        // 10 x 3 LED segments
+#define NUM_LEDS 72        // 10 x 3 LED segments
 // #define LED_CHIPSET TM1803 // Radio shack's chipset (SKU 2760339)
 #define LED_CHIPSET WS2811
 // #define COLOR_ORDER GBR    // LED bit order is Green Blue Red.
@@ -55,6 +55,7 @@ CRGB leds[NUM_LEDS];
 uint32_t g_color;
 long n;
 boolean wifiConnected = false;
+uint32_t loop_count = 0;
 
 // Power Management Hack
 uint32_t portcount = 0;
@@ -141,7 +142,12 @@ void loop()
    LuminousThings.loop();
 
    // Wait a moment then loop back to beginning
-   delay(1);
+   delay(100);
+
+   loop_count++;
+   Serial.print("loop count:");
+   Serial.print(loop_count);
+   Serial.println("");
 }
 
 // Alexa "Light Box 1" callback function
